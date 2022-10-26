@@ -1,14 +1,16 @@
 import 'styles/main.css';
 import 'styles/chrome-bug.css';
-import { useEffect, useState } from 'react';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-import Layout from 'components/Layout';
+import Layout from '@/components/Layout';
 import { SessionContextProvider } from '@supabase/auth-helpers-react';
 import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs';
 import { AppProps } from 'next/app';
 import { MyUserContextProvider } from 'utils/useUser';
 import type { Database } from 'types_db';
+import { ThemeProvider } from "next-themes";
+import Script from "next/script";
+
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const [supabaseClient] = useState(() =>
@@ -19,7 +21,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   }, []);
 
   return (
-    <div className="bg-black">
+    <ThemeProvider attribute="class">
       <SessionContextProvider supabaseClient={supabaseClient}>
         <MyUserContextProvider>
           <Layout>
@@ -27,6 +29,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           </Layout>
         </MyUserContextProvider>
       </SessionContextProvider>
-    </div>
+    </ThemeProvider>
   );
 }

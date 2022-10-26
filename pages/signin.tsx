@@ -4,10 +4,10 @@ import { useEffect, useState, FormEvent } from 'react';
 import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
 
 import Button from 'components/ui/Button';
-import GitHub from 'components/icons/GitHub';
+import { GitHub } from '@/components/icons/Icons';
 import Input from 'components/ui/Input';
 import LoadingDots from 'components/ui/LoadingDots';
-import Logo from 'components/icons/Logo';
+import { Logo } from '@/components/icons/Icons';
 import { Provider } from '@supabase/supabase-js';
 import { getURL } from '@/utils/helpers';
 
