@@ -6,7 +6,7 @@ import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
 
 import Button from 'components/ui/Button';
 import Input from 'components/ui/Input';
-import Logo from 'components/icons/Logo';
+import { Logo } from 'components/icons/Icons';
 import { updateUserName } from 'utils/supabase-client';
 
 const SignUp = () => {
