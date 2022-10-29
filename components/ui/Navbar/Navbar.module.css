@@ -17,3 +17,7 @@
 .logo {
   @apply cursor-pointer rounded-full transform duration-100 ease-in-out;
 }
+
+.btn {
+ @apply w-full px-6 py-2 mt-3 text-center text-white bg-purple-600 rounded-md lg:ml-5
+ }

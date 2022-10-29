@@ -69,15 +69,9 @@ const Navbar = () => {
                         </a>
                       </Link>
                     ))}
-                    <Link href="/contact">
-                      <a className="w-full px-6 py-2 mt-3 text-center text-white bg-purple-600 rounded-md lg:ml-5">
-                        Get Started
-                      </a>
-                    </Link>
-                    <div className="flex flex-1 justify-end space-x-8">
                       {user ? (
                         <span
-                          className={s.link}
+                          className={s.btn}
                           onClick={async () => {
                             await supabaseClient.auth.signOut();
                             router.push('/signin');
@@ -87,10 +81,10 @@ const Navbar = () => {
                         </span>
                       ) : (
                         <Link href="/signin">
-                          <a className={s.link}>Sign in</a>
+                            <a className={s.btn}>Sign in</a>
                         </Link>
                       )}
-                    </div>
+                    
                   </>
                 </Disclosure.Panel>
                 <div className="absolute mx-auto right-20 lg:right-60">
@@ -116,16 +110,10 @@ const Navbar = () => {
           </ul>
         </div>
 
-        <div className="hidden mr-3 space-x-4 lg:flex nav__item">
-          <Link href="/">
-            <a className="px-6 py-2 text-white bg-purple-500 rounded-md md:ml-5">
-              Get Started
-            </a>
-          </Link>
-          <div className="flex flex-1 justify-end space-x-8">
+        <div className="hidden mr-3 space-x-4 lg:flex nav__item">     
             {user ? (
               <span
-                className={s.link}
+              className={s.btn}
                 onClick={async () => {
                   await supabaseClient.auth.signOut();
                   router.push('/signin');
@@ -135,10 +123,10 @@ const Navbar = () => {
               </span>
             ) : (
               <Link href="/signin">
-                <a className={s.link}>Sign in</a>
+                <a className={s.btn}>Sign in</a>
               </Link>
             )}
-          </div>
+          
         </div>
       </nav>
     </div>

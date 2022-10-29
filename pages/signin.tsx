@@ -183,14 +183,15 @@ const SignIn = () => {
             ></div>
           </div>
 
+          
           <Button
             variant="slim"
             type="submit"
             disabled={loading}
-            onClick={() => handleOAuthSignIn('github')}
+            onClick={() => handleOAuthSignIn('google')}
           >
-            <GitHub />
-            <span className="ml-2">Continue with GitHub</span>
+            {/* <Google /> */}
+            <span className="ml-2">Continue with Google</span>
           </Button>
         </div>
       </div>
