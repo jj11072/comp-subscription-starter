@@ -11,6 +11,8 @@ import { Logo } from '@/components/icons/Icons';
 import { Provider } from '@supabase/supabase-js';
 import { getURL } from '@/utils/helpers';
 
+//TODO get google icon for sign in
+
 const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

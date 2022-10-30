@@ -1,14 +1,14 @@
 import Link from 'next/link';
 import s from './Navbar.module.css';
-
-
+import ThemeChanger from './ThemeChanger';
 
 import { useRouter } from 'next/router';
 import { useUser } from 'utils/useUser';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { Disclosure } from '@headlessui/react';
-import ThemeChanger from './ThemeChanger';
 import { Logo } from '@/components/icons/Icons';
+
+
 
 const Navbar = () => {
   const navigation = ['product', 'account', 'pricing', 'contact'];
@@ -16,7 +16,7 @@ const Navbar = () => {
   const supabaseClient = useSupabaseClient();
   const { user } = useUser();
 
-
+  
 
   return (
     <div className="w-full">
@@ -60,15 +60,18 @@ const Navbar = () => {
                   </svg>
                 </Disclosure.Button>
 
-                <Disclosure.Panel className="flex flex-wrap w-full my-5 lg:hidden">
-                  <>
-                    {navigation.map((item, index) => (
-                      <Link key={index} href={item}>
-                        <a className="w-full px-4 py-2 -ml-4 text-gray-500 rounded-md dark:text-gray-300 hover:text-purple-500 dark:hover:text-purple-500 focus:text-purple-500 focus:bg-indigo-100 dark:focus:bg-black focus:outline-none">
+                <Disclosure.Panel  className="flex flex-wrap w-full my-5 lg:hidden">              
+                  <Disclosure.Button >
+                    {navigation.map((item, index ) => (
+                      
+      
+                        <a href={`/${item}`} key={index} className="w-full px-4 py-2 text-center  text-gray-500 rounded-md dark:text-gray-300 hover:text-purple-500 dark:hover:text-purple-500 focus:text-purple-500 focus:bg-indigo-100 dark:focus:bg-black focus:outline-none">
                           {item}
                         </a>
-                      </Link>
+                      
+                      
                     ))}
+                  </Disclosure.Button>
                       {user ? (
                         <span
                           className={s.btn}
@@ -84,9 +87,9 @@ const Navbar = () => {
                             <a className={s.btn}>Sign in</a>
                         </Link>
                       )}
-                    
-                  </>
+                             
                 </Disclosure.Panel>
+
                 <div className="absolute mx-auto right-20 lg:right-60">
                   {!open ? <ThemeChanger /> : null}
                 </div>
@@ -133,55 +136,6 @@ const Navbar = () => {
   );
 };
 
-// const Navbar = () => {
-//   const router = useRouter();
-//   const supabaseClient = useSupabaseClient();
-//   const { user } = useUser();
 
-//   return (
-//     <nav className={s.root}>
-//       <a href="#skip" className="sr-only focus:not-sr-only">
-//         Skip to content
-//       </a>
-//       <div className="mx-auto max-w-6xl px-6">
-//         <div className="flex justify-between align-center flex-row py-4 md:py-6 relative">
-//           <div className="flex flex-1 items-center">
-//             <Link href="/">
-//               <a className={s.logo} aria-label="Logo" role="img">
-//                 <Logo />
-//               </a>
-//             </Link>
-//             <nav className="space-x-2 ml-6 lg:block">
-//               <Link href="/">
-//                 <a className={s.link}>Pricing</a>
-//               </Link>
-//               <Link href="/account">
-//                 <a className={s.link}>Account</a>
-//               </Link>
-//             </nav>
-//           </div>
-
-//           <div className="flex flex-1 justify-end space-x-8">
-//             {user ? (
-//               <span
-//                 className={s.link}
-//                 onClick={async () => {
-//                   await supabaseClient.auth.signOut();
-//                   router.push('/signin');
-//                 }}
-//               >
-//                 Sign out
-//               </span>
-//             ) : (
-//               <Link href="/signin">
-//                 <a className={s.link}>Sign in</a>
-//               </Link>
-//             )}
-//           </div>
-//         </div>
-//       </div>
-//     </nav>
-//   );
-// };
 
 export default Navbar;

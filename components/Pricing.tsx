@@ -44,7 +44,7 @@ export default function Pricing({ products }: Props) {
       setPriceIdLoading(undefined);
     }
   };
-
+//TODO change background color of this section
   if (!products.length)
     return (
       <section className="bg-black">

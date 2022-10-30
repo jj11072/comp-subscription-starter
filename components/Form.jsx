@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useForm, useWatch } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 const Form = () => {
   const {
@@ -14,7 +14,10 @@ const Form = () => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [Message, setMessage] = useState('');
 
-  const userName = useWatch({ control, name: 'name', defaultValue: 'Someone' });
+  //TODO: Add user name to form
+  // const {user} = useUser();
+
+  
 
   const onSubmit = async (data, e) => {
     console.log(data);
@@ -47,7 +50,7 @@ const Form = () => {
 
   return (
     <section>
-      <div className="flex flex-col items-center justify-center h-32 p-5 bg-indigo-600">
+      <div className="flex flex-col items-center justify-center h-32 p-5 bg-purple-600">
         <h3 className="text-lg text-white">How can we help?</h3>
         <p className="text-white opacity-50">
           We usually respond in a few hours
@@ -74,7 +77,7 @@ const Form = () => {
                 className={`w-full px-3 py-2 placeholder-gray-300 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring   ${
                   errors.name
                     ? 'border-red-600 focus:border-red-600 ring-red-100'
-                    : 'border-gray-300 focus:border-indigo-600 ring-indigo-100'
+                    : 'border-gray-300 focus:border-purple-600 ring-indigo-100'
                 }`}
               />
               {errors.name && (
@@ -105,7 +108,7 @@ const Form = () => {
                 className={`w-full px-3 py-2 placeholder-gray-300 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring   ${
                   errors.email
                     ? 'border-red-600 focus:border-red-600 ring-red-100'
-                    : 'border-gray-300 focus:border-indigo-600 ring-indigo-100'
+                    : 'border-gray-300 focus:border-purple-600 ring-indigo-100'
                 }`}
               />
 
@@ -134,7 +137,7 @@ const Form = () => {
                 className={`w-full px-3 py-2 placeholder-gray-300 bg-white border border-gray-300 rounded-md h-28 focus:outline-none focus:ring   ${
                   errors.message
                     ? 'border-red-600 focus:border-red-600 ring-red-100'
-                    : 'border-gray-300 focus:border-indigo-600 ring-indigo-100'
+                    : 'border-gray-300 focus:border-purple-600 ring-indigo-100'
                 }`}
                 required
               ></textarea>
@@ -147,7 +150,7 @@ const Form = () => {
             <div className="mb-3">
               <button
                 type="submit"
-                className="w-full px-3 py-4 text-white bg-indigo-500 rounded-md focus:bg-purple-600 focus:outline-none"
+                className="w-full px-3 py-4 text-white bg-purple-500 rounded-md focus:bg-purple-600 focus:outline-none"
               >
                 {isSubmitting ? (
                   <svg
@@ -200,7 +203,7 @@ const Form = () => {
               </h3>
               <p className="text-gray-700 md:px-3">{Message}</p>
               <button
-                className="mt-6 text-indigo-600 focus:outline-none"
+                className="mt-6 text-purple-600 focus:outline-none"
                 onClick={() => reset()}
               >
                 Go back
