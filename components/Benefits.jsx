@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import React, { useRef, useCallback } from 'react';
+import React, { useRef } from 'react';
 import Container from './Container';
 
 export default function Benefits(props) {
@@ -7,21 +7,23 @@ export default function Benefits(props) {
   const first = useRef();
   // JSON.stringify(data);
 
-  //  const styleSecondWord = (styleHook) => {
-  //    styleHook = styleHook || "second-word";
-  //    let words = [];
-  //    for (let i = 0, len = this.length; i < len; i++) {
-  //      words = (this[i].textContent || this[i].innerText).split(/\s+/);
-  //      if (words[1]) {
-  //        words[1] = '<span class="' + styleHook + '">' + words[1] + "</span>";
-  //        this[i].innerHTML = words.join(" ");
-  //      }
-  //    }
-  //  }
-  //  const handleChange = useCallback(() => {
-  //    first = styleSecondWord("word") ;
-  //  }, [])
+    // const styleSecondWord = (styleHook) => {
+    //   styleHook = styleHook || "second-word";
+    //   let words = [];
+    //   for (let i = 0, len = this.length; i < len; i++) {
+    //     words = (this[i].textContent || this[i].innerText).split(/\s+/);
+    //     if (words[1]) {
+    //      words[1] = '<span class="' + styleHook + '">' + words[1] + "</span>";
+    //       this[i].innerHTML = words.join(" ");
+    //     }
+    //   }
+    // }
+    // const handleChange = useCallback(() => {
+    //   document.getElementsByTagName('h3').styleSecondWord("word") ;
+    // }, [])
 
+    // window.addEventListener('load', handleChange);
+    
   console.log(first.current);
 
   return (
@@ -41,6 +43,8 @@ export default function Benefits(props) {
               layout="intrinsic"
               placeholder="blur"
               blurDataURL="hero.png"
+              loading='lazy'
+              className='-z-10'
             />
           </div>
         </div>

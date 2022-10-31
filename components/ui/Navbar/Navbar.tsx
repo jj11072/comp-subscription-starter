@@ -19,25 +19,25 @@ const Navbar = () => {
   
 
   return (
-    <div className="w-full">
-      <nav className="container relative flex flex-wrap items-center justify-between p-8 mx-auto lg:justify-between xl:px-0">
+    <header className="container sticky top-0 bg-white dark:bg-dark z-20 ">
+      <nav className="container outline-bottom relative flex flex-wrap items-center justify-between p-6 w-full lg:justify-between xl:px-0">
         {/* Logo  */}
-        <Disclosure>
+        <Disclosure >
           {({ open }) => (
             <>
-              <div className="flex flex-wrap items-center justify-between w-full lg:w-auto">
+              <div className=" flex flex-wrap items-center justify-between w-full lg:w-auto">
                 <Link href="/">
                   <a className="flex items-center space-x-2 text-2xl font-medium text-purple-500 dark:hover:text-purple-500 dark:text-gray-100">
                     <span>
                       <Logo />
                     </span>
-                    <span>Comp</span>
+                    <span >Comp</span>
                   </a>
                 </Link>
 
                 <Disclosure.Button
                   aria-label="Toggle Menu"
-                  className="px-2 py-1 ml-auto text-gray-500 rounded-md lg:hidden hover:text-purple-500 dark:hover:text-purple-500 focus:text-purple-500 dark:focus:text-purple-500 focus:bg-indigo-100 focus:outline-none dark:text-gray-300 dark:focus:bg-trueGray-700"
+                  className="px-2 py-1  text-gray-500 rounded-md lg:hidden hover:text-purple-500 dark:hover:text-purple-500 focus:text-purple-500 dark:focus:text-purple-500 focus:bg-indigo-100 focus:outline-none dark:text-gray-300 dark:focus:bg-transparent"
                 >
                   <svg
                     className="w-6 h-6 fill-current"
@@ -60,34 +60,35 @@ const Navbar = () => {
                   </svg>
                 </Disclosure.Button>
 
-                <Disclosure.Panel  className="flex flex-wrap w-full my-5 lg:hidden">              
-                  <Disclosure.Button >
+                <Disclosure.Panel  className="flex flex-wrap w-full my-5 lg:hidden">  
+                  <>
                     {navigation.map((item, index ) => (
-                      
-      
-                        <a href={`/${item}`} key={index} className="w-full px-4 py-2 text-center  text-gray-500 rounded-md dark:text-gray-300 hover:text-purple-500 dark:hover:text-purple-500 focus:text-purple-500 focus:bg-indigo-100 dark:focus:bg-black focus:outline-none">
-                          {item}
-                        </a>
-                      
-                      
-                    ))}
-                  </Disclosure.Button>
-                      {user ? (
-                        <span
-                          className={s.btn}
-                          onClick={async () => {
-                            await supabaseClient.auth.signOut();
-                            router.push('/signin');
-                          }}
-                        >
-                          Sign out
-                        </span>
-                      ) : (
-                        <Link href="/signin">
-                            <a className={s.btn}>Sign in</a>
-                        </Link>
-                      )}
-                             
+                      <Link href={`/${item}`} key={index} >
+                          <a className={s.a}>
+                            <Disclosure.Button className='btn dark:text-white' >
+                              {item}
+                            </Disclosure.Button>
+                          </a>
+                        </Link>        
+                    ))}    
+                  </>
+                  <>
+                    {user ? (
+                      <span
+                        className={s.btn_primary}
+                        onClick={async () => {
+                          await supabaseClient.auth.signOut();
+                          router.push('/signin');
+                        }}
+                      >
+                        Sign out
+                      </span>
+                    ) : (
+                      <Link href="/signin">
+                          <a className={s.btn_primary}>Sign in</a>
+                      </Link>
+                    )}
+                  </>
                 </Disclosure.Panel>
 
                 <div className="absolute mx-auto right-20 lg:right-60">
@@ -103,8 +104,8 @@ const Navbar = () => {
           <ul className="items-center justify-end flex-1 pt-6 list-none lg:pt-0 lg:flex">
             {navigation.map((menu, index) => (
               <li className="mr-3 nav__item" key={index}>
-                <Link href="/">
-                  <a className="inline-block px-4 py-2 text-lg font-normal text-gray-800 no-underline rounded-md dark:text-gray-200 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-gray-800">
+                <Link href={menu}>
+                  <a className="inline-block px-4 py-2 text-lg font-normal text-gray-800 no-underline rounded-md dark:text-gray-200 hover:text-purple-500 dark:hover:text-purple-500 dark:focus:text-purple-500  focus:text-purple-500  focus:bg-indigo-100 focus:outline-none dark:focus:bg-gray-800">
                     {menu}
                   </a>
                 </Link>
@@ -113,10 +114,10 @@ const Navbar = () => {
           </ul>
         </div>
 
-        <div className="hidden mr-3 space-x-4 lg:flex nav__item">     
+        <div className="hidden space-x-4 lg:flex nav__item">     
             {user ? (
               <span
-              className={s.btn}
+              className={s.btn_primary}
                 onClick={async () => {
                   await supabaseClient.auth.signOut();
                   router.push('/signin');
@@ -126,13 +127,13 @@ const Navbar = () => {
               </span>
             ) : (
               <Link href="/signin">
-                <a className={s.btn}>Sign in</a>
+                <a className={s.btn_primary}>Sign in</a>
               </Link>
             )}
           
         </div>
       </nav>
-    </div>
+    </header>
   );
 };
 

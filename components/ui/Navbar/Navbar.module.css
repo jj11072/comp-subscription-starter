@@ -1,23 +1,15 @@
-.root {
-  @apply sticky top-0 bg-black z-40 transition-all duration-150;
-}
 
-.link {
-  @apply inline-flex items-center leading-6 font-medium transition ease-in-out duration-75 cursor-pointer text-zinc-200 rounded-md p-1;
-}
-
-.link:hover {
-  @apply text-zinc-100;
-}
-
-.link:focus {
-  @apply outline-none text-zinc-100 ring-2 ring-pink-500 ring-opacity-50;
-}
 
 .logo {
   @apply cursor-pointer rounded-full transform duration-100 ease-in-out;
 }
 
-.btn {
- @apply w-full px-6 py-2 mt-3 text-center text-white bg-purple-600 rounded-md lg:ml-5
+.btn_primary {
+ @apply w-full px-6 py-2 text-center text-white bg-purple-600 rounded-md lg:ml-5
  }
+
+
+ .a{
+  @apply w-full mb-4   hover:text-purple-500 dark:hover:text-purple-500 focus:text-purple-500 focus:bg-indigo-100 dark:focus:bg-black focus:outline-none
+ }
+ 

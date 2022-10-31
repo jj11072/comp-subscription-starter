@@ -2,11 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components{
+.btn {
+ @apply w-full px-6 py-2 text-center text-black  outline  -outline-offset-2 outline-purple-500 rounded-md lg:ml-5 
+ }
+ .bg-dark{
+   background-color: rgb( 18, 18, 18);
+ }
+}
+
 *,
 *:before,
 *:after {
   box-sizing: border-box;
-  scroll-behavior: smooth;
+  
+  
 
 }
 
@@ -19,6 +29,7 @@ html {
   box-sizing: border-box;
   touch-action: manipulation;
   font-feature-settings: 'case' 1, 'rlig' 1, 'calt' 0;
+
 }
 
 html,
@@ -26,19 +37,24 @@ body {
   @apply font-sans  antialiased;
   text-rendering: optimizeLegibility;
   -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
  
 }
 
 body {
   position: relative;
   min-height: 100%;
-  margin: 0;
+  margin: 0; 
+  @apply  ml-1 lg:ml-0 px-3 lg:px-0
 }
 
 a {
-  color: inherit;
   text-decoration: none;
 }
+
+img{
+  z-index: 0;
+  }
 
 .animated {
   -webkit-animation-duration: 1s;
@@ -52,3 +68,4 @@ a {
 .height-screen-helper {
   height: calc(100vh - 80px);
 }
+
