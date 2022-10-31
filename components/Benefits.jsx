@@ -43,8 +43,8 @@ export default function Benefits(props) {
               layout="intrinsic"
               placeholder="blur"
               blurDataURL="hero.png"
-              loading='lazy'
-              className='-z-10'
+              loading="lazy"
+              className="-z-10"
             />
           </div>
         </div>
@@ -66,7 +66,7 @@ export default function Benefits(props) {
               <p className="max-w-2xl py-4 text-lg leading-normal text-gray-500 lg:text-xl xl:text-xl dark:text-gray-300">
                 {data && data.desc
                   ? data.desc
-                  : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'}
+                  : 'no description currently available'}
               </p>
             </div>
 
@@ -75,7 +75,7 @@ export default function Benefits(props) {
                 <Benefit key={index} title={item.title} icon={item.icon}>
                   {item && item.desc
                     ? item.desc
-                    : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'}
+                    : 'no description currently available'}
                 </Benefit>
               ))}
             </div>

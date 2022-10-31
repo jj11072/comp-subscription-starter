@@ -10,7 +10,7 @@ import { Logo } from '@/components/icons/Icons';
 
 
 
-const Navbar = () => {
+const Header = () => {
   const navigation = ['product', 'account', 'pricing', 'contact'];
   const router = useRouter();
   const supabaseClient = useSupabaseClient();
@@ -139,4 +139,4 @@ const Navbar = () => {
 
 
 
-export default Navbar;
+export default Header;

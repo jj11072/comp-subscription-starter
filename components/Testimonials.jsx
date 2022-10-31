@@ -47,7 +47,7 @@ export default function Testimonials() {
 
             <Avatar
               image={userThreeImg}
-              name="Gabrielle Winn"
+              name="Gabrielle Winy"
               title="Co-founder of Another Company"
             />
           </div>
