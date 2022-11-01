@@ -22,7 +22,7 @@ export const getActiveProductsWithPrices = async (): Promise<
     console.log(error.message);
     throw error;
   }
-  // TODO: improve the typing here.
+  
   return (data as any) || [];
 };
 
@@ -35,3 +35,6 @@ export const updateUserName = async (user: User, name: string) => {
     .eq('id', user.id);
 };
 
+supabase.auth.onAuthStateChange((event, session) => {
+  if (event == 'USER_UPDATED') console.log('USER_UPDATED', session)
+})

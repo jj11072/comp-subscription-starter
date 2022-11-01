@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import React, { forwardRef, useRef, ButtonHTMLAttributes } from 'react';
+import React, { forwardRef, useRef, ButtonHTMLAttributes, MouseEventHandler } from 'react';
 import mergeRefs from 'react-merge-refs';
 import styles from './Button.module.css';
 
@@ -11,6 +11,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   width?: number;
   loading?: boolean;
   Component?: React.ComponentType;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
 const Button = forwardRef<HTMLButtonElement, Props>((props, buttonRef) => {
@@ -19,6 +20,7 @@ const Button = forwardRef<HTMLButtonElement, Props>((props, buttonRef) => {
     variant = 'flat',
     children,
     active,
+    onClick,
     width,
     loading = false,
     disabled = false,
@@ -41,7 +43,8 @@ const Button = forwardRef<HTMLButtonElement, Props>((props, buttonRef) => {
       aria-pressed={active}
       data-variant={variant}
       ref={mergeRefs([ref, buttonRef])}
-      className={rootClassName}
+      onClick={onClick}
+      className='btn bg-purple-500  dark:text-white font-bold my-4 px-4 rounded'
       disabled={disabled}
       style={{
         width,

@@ -8,6 +8,8 @@ import { postData } from 'utils/helpers';
 
 import { User } from '@supabase/supabase-js';
 import { withPageAuth } from '@supabase/auth-helpers-nextjs';
+import { updateUserName } from 'utils/supabase-client';
+import Input from '@/components/ui/Input';
 
 interface Props {
   title: string;
@@ -36,6 +38,17 @@ export const getServerSideProps = withPageAuth({ redirectTo: '/signin' });
 export default function Account({ user }: { user: User }) {
   const [loading, setLoading] = useState(false);
   const { isLoading, subscription, userDetails } = useUser();
+  const [name, setName] = useState('');
+
+
+  const handleUpdateName = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+    await updateUserName(user, name);
+    setLoading(false);
+
+
+  };
 
   const redirectToCustomerPortal = async () => {
     setLoading(true);
@@ -50,6 +63,8 @@ export default function Account({ user }: { user: User }) {
     setLoading(false);
   };
 
+  
+
   const subscriptionPrice =
     subscription &&
     new Intl.NumberFormat('en-US', {
@@ -57,6 +72,8 @@ export default function Account({ user }: { user: User }) {
       currency: subscription?.prices?.currency,
       minimumFractionDigits: 0
     }).format((subscription?.prices?.unit_amount || 0) / 100);
+
+
 
   return (
     <section className="bg-white dark:bg-dark mb-32">
@@ -102,8 +119,8 @@ export default function Account({ user }: { user: User }) {
             ) : subscription ? (
               `${subscriptionPrice}/${subscription?.prices?.interval}`
             ) : (
-              <Link href="/">
-                <a>Choose your plan</a>
+              <Link href="/pricing">
+                <a className='underline'>Choose your plan</a>
               </Link>
             )}
           </div>
@@ -111,14 +128,28 @@ export default function Account({ user }: { user: User }) {
         <Card
           title="Your Name"
           description="Please enter your full name, or a display name you are comfortable with."
-          footer={<p>Please use 64 characters at maximum.</p>}
+          footer={<p>Please use 32 characters at maximum.</p>}
         >
+          {/* TODO: */} 
           <div className="text-xl mt-8 mb-4 font-semibold">
+            <form onSubmit={handleUpdateName} method='post'>
+            <Input placeholder="Name" onChange={setName} />
+              <Button
+                variant="slim"
+                type="submit"
+                loading={loading}
+                disabled={loading || !name.length }
+                onClick={()=>window.location.href=window.location.href}
+              >
+                change
+              </Button>
+            </form>
             {userDetails ? (
               `${
                 userDetails.full_name ??
                 `${userDetails.first_name} ${userDetails.last_name}`
               }`
+             
             ) : (
               <div className="h-8 mb-6">
                 <LoadingDots />
