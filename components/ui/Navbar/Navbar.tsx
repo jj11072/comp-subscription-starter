@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from '@/components/NoScrollLink';
 import s from './Navbar.module.css';
 import ThemeChanger from './ThemeChanger';
 
@@ -19,7 +19,7 @@ const Header = () => {
   
 
   return (
-    <header className="container sticky top-0 bg-white dark:bg-dark z-20 ">
+    <header className="container sticky -top-1 bg-white dark:bg-dark z-20 ">
       <nav className="container outline-bottom relative flex flex-wrap items-center justify-between p-6 w-full lg:justify-between xl:px-0">
         {/* Logo  */}
         <Disclosure >
@@ -31,7 +31,7 @@ const Header = () => {
                     <span>
                       <Logo />
                     </span>
-                    <span >Comp</span>
+                    <span>Comp</span>
                   </a>
                 </Link>
 
@@ -60,7 +60,7 @@ const Header = () => {
                   </svg>
                 </Disclosure.Button>
 
-                <Disclosure.Panel  className="flex flex-wrap w-full my-5 lg:hidden">  
+                <Disclosure.Panel  className="relative pb-10 flex flex-wrap w-full my-5 lg:hidden">  
                   <>
                     {navigation.map((item, index ) => (
                       <Link href={`/${item}`} key={index} >
@@ -75,7 +75,7 @@ const Header = () => {
                   <>
                     {user ? (
                       <span
-                        className={s.btn_primary}
+                        className='bg-purple-500 px-4 py-2 rounded-md text-white cursor-pointer'
                         onClick={async () => {
                           await supabaseClient.auth.signOut();
                           router.push('/signin');
@@ -85,7 +85,11 @@ const Header = () => {
                       </span>
                     ) : (
                       <Link href="/signin">
-                          <a className={s.btn_primary}>Sign in</a>
+                          <a className='absolute right-0 bottom-0 rounded-md lg:ml-5'>
+                            <Disclosure.Button className=' btn bg-purple-500 text-white'  >
+                              Sign in
+                            </Disclosure.Button>
+                          </a>
                       </Link>
                     )}
                   </>

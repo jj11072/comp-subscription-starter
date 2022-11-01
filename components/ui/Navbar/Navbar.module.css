@@ -4,12 +4,9 @@
   @apply cursor-pointer rounded-full transform duration-100 ease-in-out;
 }
 
-.btn_primary {
- @apply w-full px-6 py-2 text-center text-white bg-purple-600 rounded-md lg:ml-5
- }
 
 
  .a{
-  @apply w-full mb-4   hover:text-purple-500 dark:hover:text-purple-500 focus:text-purple-500 focus:bg-indigo-100 dark:focus:bg-black focus:outline-none
+  @apply w-full mb-4 rounded-md  hover:text-purple-500 dark:hover:text-purple-500 focus:text-purple-500 focus:bg-indigo-100 dark:focus:bg-black focus:outline-none
  }
  

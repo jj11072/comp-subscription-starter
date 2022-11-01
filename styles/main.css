@@ -7,7 +7,7 @@
  @apply w-full px-6 py-2 text-center text-black  outline  -outline-offset-2 outline-purple-500 rounded-md lg:ml-5 
  }
  .bg-dark{
-   background-color: rgb( 18, 18, 18, 0.9);
+   background-color: rgb( 18, 18, 18);
  }
 }
 

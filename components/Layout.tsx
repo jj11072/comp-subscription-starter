@@ -5,8 +5,9 @@ import Header from 'components/ui/Navbar';
 import Footer from 'components/ui/Footer';
 import { ReactNode } from 'react';
 import { PageMeta } from '../types';
-import { motion } from 'framer-motion';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useState } from 'react';
+
 
 interface Props {
   children: ReactNode;
@@ -19,7 +20,7 @@ const variants = {
   exit: { opacity: 0, x: 0, y: -100 },
 };
 
-export default function Layout({ children, meta: pageMeta }: Props) {
+export default function Layout({ children, meta: pageMeta, }: Props) {
   const router = useRouter();
   const meta = {
     title: 'Next.js Subscription Starter',
@@ -27,6 +28,9 @@ export default function Layout({ children, meta: pageMeta }: Props) {
     cardImage: '/og.png',
     ...pageMeta
   };
+
+  const [isVisible] = useState(true);
+ 
 
   return (
     <>
@@ -47,20 +51,25 @@ export default function Layout({ children, meta: pageMeta }: Props) {
         <meta name="twitter:description" content={meta.description} />
         <meta name="twitter:image" content={meta.cardImage} />
       </Head>
-      <Header />      
-         <motion.main
-            id='skip'
-            initial="hidden"
-            animate="enter"
-            exit="exit"
-            variants={variants}
-            transition={{ type: 'linear' }}
-            className="
-                   
-                "
+      <Header /> 
+      <motion.main         
+        initial='hidden'
+        animate="enter"
+        exit="exit"
+        variants={variants}
+        transition={{ type: 'spring' }}
+        >        
+          <AnimatePresence
+            mode='wait'
+            
+            onExitComplete={() => window.scrollTo(0, 0)}
           >
+          
+          
             {children}
-          </motion.main>
+           
+          </AnimatePresence>
+      </motion.main>
       <Footer />
     </>
   );
