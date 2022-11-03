@@ -7,7 +7,7 @@ import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
 import Button from 'components/ui/Button';
 import Input from 'components/ui/Input';
 import { Logo } from 'components/icons/Icons';
-import { updateUserName } from 'utils/supabase-client';
+import { updateFullName } from 'utils/supabase-client';
 
 const SignUp = () => {
   const supabaseClient = useSupabaseClient();
@@ -39,7 +39,7 @@ const SignUp = () => {
       setMessage({ type: 'error', content: error.message });
     } else {
       if (createdUser) {
-        await updateUserName(createdUser, name);
+        await updateFullName(createdUser, name);
         setNewUser(createdUser);
       } else {
         setMessage({

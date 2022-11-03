@@ -44,7 +44,7 @@ const Button = forwardRef<HTMLButtonElement, Props>((props, buttonRef) => {
       data-variant={variant}
       ref={mergeRefs([ref, buttonRef])}
       onClick={onClick}
-      className='btn bg-purple-500  dark:text-white font-bold my-4 px-4 rounded'
+      className={rootClassName}
       disabled={disabled}
       style={{
         width,

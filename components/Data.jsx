@@ -2,8 +2,10 @@ import benefitOneImg from '../public/img/benefit1.png';
 import benefitTwoImg from '../public/img/benefit2.png';
 import { Shield, Cloud, Phone, Recover, Tools, Group } from './icons/Icons';
 
+const titleOne = () => <h3>Helping <span className='text-purple-500'>you</span> make better decisions</h3>
+
 const benefitOne = {
-  title: 'Helping you make better decisions',
+  title: <titleOne />,
   desc: `We provide real time country specific datasets with real time
    analysis specifically tailored for you, as well as technology advice 
    that may help you make those business or investment decisions with greater confidence`,

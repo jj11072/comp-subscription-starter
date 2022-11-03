@@ -1,15 +1,17 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useState, ReactNode } from 'react';
 
 import LoadingDots from 'components/ui/LoadingDots';
 import Button from 'components/ui/Button';
+import Input from '@/components/ui/Input';
+
 import { useUser } from 'utils/useUser';
 import { postData } from 'utils/helpers';
+import { resetPasswordRequest, updateFullName, updateUserName } from 'utils/supabase-client';
 
 import { User } from '@supabase/supabase-js';
 import { withPageAuth } from '@supabase/auth-helpers-nextjs';
-import { updateUserName } from 'utils/supabase-client';
-import Input from '@/components/ui/Input';
 
 interface Props {
   title: string;
@@ -39,17 +41,28 @@ export default function Account({ user }: { user: User }) {
   const [loading, setLoading] = useState(false);
   const { isLoading, subscription, userDetails } = useUser();
   const [name, setName] = useState('');
+  const router = useRouter();
 
 
   const handleUpdateName = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    await updateUserName(user, name);
+    await updateFullName(user, name);
     setLoading(false);
 
 
   };
 
+  const handleResetRequest = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+    await resetPasswordRequest(user, user ? user.email : undefined);
+    setLoading(false);
+  };
+
+  
+
+ 
   const redirectToCustomerPortal = async () => {
     setLoading(true);
     try {
@@ -62,8 +75,6 @@ export default function Account({ user }: { user: User }) {
     }
     setLoading(false);
   };
-
-  
 
   const subscriptionPrice =
     subscription &&
@@ -127,19 +138,20 @@ export default function Account({ user }: { user: User }) {
         </Card>
         <Card
           title="Your Name"
-          description="Please enter your full name, or a display name you are comfortable with."
+          description="Please enter your full name."
           footer={<p>Please use 32 characters at maximum.</p>}
         >
-          {/* TODO: */} 
-          <div className="text-xl mt-8 mb-4 font-semibold">
-            <form onSubmit={handleUpdateName} method='post'>
-            <Input placeholder="Name" onChange={setName} />
+         
+          <div className="text-xl mt-4 mb-4 font-semibold">
+            <form className='mb-4' onSubmit={handleUpdateName} method='post'>
+             
+            <Input placeholder="Name" onChange={setName} className='mb-4' />
               <Button
                 variant="slim"
                 type="submit"
                 loading={loading}
                 disabled={loading || !name.length }
-                onClick={()=>window.location.href=window.location.href}
+                onClick={()=>router.reload()}
               >
                 change
               </Button>
@@ -165,6 +177,24 @@ export default function Account({ user }: { user: User }) {
           <p className="text-xl mt-8 mb-4 font-semibold">
             {user ? user.email : undefined}
           </p>
+        </Card>
+        <Card
+          title="Reset Password"
+          description="request a password change."
+          footer={<p>We will email you to verify the change.</p>}
+        >
+        <form className='mb-4' onSubmit={handleResetRequest} method='post'>
+          
+          <Button
+            variant="slim"
+            type="submit"
+            loading={loading}
+            disabled={loading || !user }
+            onClick={() => router.push('/signin')}
+          >
+            change
+          </Button>
+        </form>
         </Card>
       </div>
     </section>
