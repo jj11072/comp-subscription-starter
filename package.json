@@ -28,6 +28,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.36.1",
+    "react-hot-toast": "^2.4.0",
     "react-merge-refs": "1.1.0",
     "stripe": "8.201.0",
     "swr": "1.2.0"

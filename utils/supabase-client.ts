@@ -3,12 +3,12 @@ import {
   User
 } from '@supabase/auth-helpers-nextjs';
 
-import { useSupabaseClient } from '@supabase/auth-helpers-react';
+
 
 import { ProductWithPrice } from 'types';
 import type { Database } from 'types_db';
 
-export const supabaseClient = useSupabaseClient();
+
 
 export const supabase = createBrowserSupabaseClient<Database>();
 
@@ -48,21 +48,8 @@ export const updateFullName = async (user: User, name: string) => {
     })
     .eq('id', user.id);
     
-    
-
 }
-;
-export const updatePassWord = async (user: User, password: any) => {
-  await supabase
-    .from('auth')
-    .update({
-      password: password
-    })
-    .eq('id', user.id);
-    
-    
 
-};
 
 
 export const resetPasswordRequest = async (user: User, email: any) => {

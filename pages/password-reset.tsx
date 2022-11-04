@@ -8,7 +8,8 @@ import Button from 'components/ui/Button';
 
 
 function PasswordReset({ user }: { user: User }) {
-	
+  
+  
 	const [updatedUser, setUpdatedUser] = useState<User | null>(null);
 	const [password, setPassword] = useState('');
 	const [loading, setLoading] = useState(false);
@@ -16,10 +17,10 @@ function PasswordReset({ user }: { user: User }) {
 		type: '',
 		content: ''
 	});
-	const email = user.email
+  // const router = useRouter();
 
 	
-	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+	const handlePasswordChange = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		setLoading(true);
 		setMessage({})
@@ -29,7 +30,7 @@ function PasswordReset({ user }: { user: User }) {
 			error 
 		} = await supabase.auth.updateUser({
 			 password: password,
-			 email 
+			 
 		});
 		if (error) {
 			setMessage({ type: 'error', content: error.message });
@@ -48,7 +49,6 @@ function PasswordReset({ user }: { user: User }) {
 		supabase.auth.onAuthStateChange(async (event: string, session: any) => {
 			const { data, error } = await supabase.auth.updateUser({
 				password: password,
-				email
 			})
 			if (event == "PASSWORD_RECOVERY") {
 
@@ -59,7 +59,7 @@ function PasswordReset({ user }: { user: User }) {
 	}, [updatedUser, user]);
 	return (
 		<div>
-			<form onSubmit={(e) => handleSubmit(e)}>
+			<form onSubmit={(e) => handlePasswordChange(e)}>
 				{message.content && (
 					<div
 						className={`${message.type === 'error' ? 'text-pink-500' : 'text-green-500'
@@ -76,6 +76,7 @@ function PasswordReset({ user }: { user: User }) {
 					required			
 					placeholder="Please enter your Password"
 					onChange={() => setPassword}
+          value='newPassword'
 				/>
 
 				<Button

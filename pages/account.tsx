@@ -12,6 +12,8 @@ import { resetPasswordRequest, updateFullName, updateUserName } from 'utils/supa
 
 import { User } from '@supabase/supabase-js';
 import { withPageAuth } from '@supabase/auth-helpers-nextjs';
+import toast, {  Toaster, useToaster } from 'react-hot-toast';
+
 
 interface Props {
   title: string;
@@ -35,6 +37,12 @@ function Card({ title, description, footer, children }: Props) {
   );
 }
 
+
+
+
+
+  
+
 export const getServerSideProps = withPageAuth({ redirectTo: '/signin' });
 
 export default function Account({ user }: { user: User }) {
@@ -42,15 +50,18 @@ export default function Account({ user }: { user: User }) {
   const { isLoading, subscription, userDetails } = useUser();
   const [name, setName] = useState('');
   const router = useRouter();
-
+  const notify = () => toast.success('Account updated');
+  const notifyEmail = () => toast.success('Check your email for the password reset link.');
 
   const handleUpdateName = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     await updateFullName(user, name);
     setLoading(false);
-
-
+    router.reload();
+    notify;
+    
+    
   };
 
   const handleResetRequest = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -58,6 +69,7 @@ export default function Account({ user }: { user: User }) {
     setLoading(true);
     await resetPasswordRequest(user, user ? user.email : undefined);
     setLoading(false);
+    notifyEmail;
   };
 
   
@@ -84,10 +96,15 @@ export default function Account({ user }: { user: User }) {
       minimumFractionDigits: 0
     }).format((subscription?.prices?.unit_amount || 0) / 100);
 
+ 
+    
+   
+
 
 
   return (
-    <section className="bg-white dark:bg-dark mb-32">
+    <section className="bg-white dark:bg-dark mb-32"> 
+    
       <div className="max-w-6xl mx-auto pt-8 sm:pt-24 pb-8 px-4 sm:px-6 lg:px-8">
         <div className="sm:flex sm:flex-col sm:align-center">
           <h1 className="text-4xl font-extrabold text-black dark:text-white sm:text-center sm:text-6xl">
@@ -122,7 +139,7 @@ export default function Account({ user }: { user: User }) {
             </div>
           }
         >
-          <div className="text-xl mt-8 mb-4 font-semibold">
+          <div className="text-xl mt-8 mb-4 font-semibold">           
             {isLoading ? (
               <div className="h-12 mb-6">
                 <LoadingDots />
@@ -143,18 +160,18 @@ export default function Account({ user }: { user: User }) {
         >
          
           <div className="text-xl mt-4 mb-4 font-semibold">
-            <form className='mb-4' onSubmit={handleUpdateName} method='post'>
+            <form className='mb-4' onSubmit={handleUpdateName} >
              
-            <Input placeholder="Name" onChange={setName} className='mb-4' />
+            <Input placeholder="Name" value={name} onChange={setName} className='mb-4' />
               <Button
                 variant="slim"
                 type="submit"
                 loading={loading}
-                disabled={loading || !name.length }
-                onClick={()=>router.reload()}
+                disabled={loading || !name.length }           
               >
                 change
               </Button>
+              
             </form>
             {userDetails ? (
               `${
@@ -165,10 +182,13 @@ export default function Account({ user }: { user: User }) {
             ) : (
               <div className="h-8 mb-6">
                 <LoadingDots />
+              
               </div>
             )}
+            
           </div>
         </Card>
+       
         <Card
           title="Your Email"
           description="Please enter the email address you want to use to login."

@@ -9,7 +9,11 @@ import { AppProps } from 'next/app';
 import { MyUserContextProvider } from 'utils/useUser';
 import type { Database } from 'types_db';
 import { ThemeProvider } from "next-themes";
-import Script from "next/script";
+
+import { Toaster } from 'react-hot-toast';
+
+
+
 
 
 export default function MyApp({ Component, pageProps }: AppProps) {
@@ -18,14 +22,19 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   );
   useEffect(() => {
     document.body.classList?.remove('loading');
+    
   }, []);
 
   return (
     <ThemeProvider attribute="class">
       <SessionContextProvider supabaseClient={supabaseClient}>
         <MyUserContextProvider>
+          
           <Layout>
+            <>
+            
             <Component {...pageProps} />
+            </>
           </Layout>
         </MyUserContextProvider>
       </SessionContextProvider>

@@ -6,7 +6,9 @@ import Footer from 'components/ui/Footer';
 import { ReactNode } from 'react';
 import { PageMeta } from '../types';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useState } from 'react';
+import { Toaster } from 'react-hot-toast';
+
+
 
 
 interface Props {
@@ -29,9 +31,8 @@ export default function Layout({ children, meta: pageMeta, }: Props) {
     ...pageMeta
   };
 
-  const [isVisible] = useState(true);
- 
 
+ 
   return (
     <>
       <Head>
@@ -64,10 +65,7 @@ export default function Layout({ children, meta: pageMeta, }: Props) {
             
             onExitComplete={() => window.scrollTo(0, 0)}
           >
-          
-          
             {children}
-           
           </AnimatePresence>
       </motion.main>
       <Footer />
