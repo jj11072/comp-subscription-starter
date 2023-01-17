@@ -8,11 +8,14 @@ import Input from '@/components/ui/Input';
 
 import { useUser } from 'utils/useUser';
 import { postData } from 'utils/helpers';
-import { resetPasswordRequest, updateFullName, updateUserName } from 'utils/supabase-client';
+import { resetPasswordRequest, updateFullName } from 'utils/supabase-client';
 
 import { User } from '@supabase/supabase-js';
 import { withPageAuth } from '@supabase/auth-helpers-nextjs';
-import toast, {  Toaster, useToaster } from 'react-hot-toast';
+
+import { ToastContainer, toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 
 interface Props {
@@ -27,10 +30,10 @@ function Card({ title, description, footer, children }: Props) {
     <div className="border border-zinc-700	max-w-3xl w-full p rounded-md m-auto my-8">
       <div className="px-5 py-4">
         <h3 className="text-2xl mb-1 font-medium">{title}</h3>
-        <p className="text-zinc-300">{description}</p>
+        <p className="text-zinc-600 dark:text-zinc-300">{description}</p>
         {children}
       </div>
-      <div className="border-t border-zinc-700 bg-zinc-900 p-4 text-zinc-500 rounded-b-md">
+      <div className="border-t border-zinc-700 bg-purple-600 dark:bg-zinc-900 p-4 text-white dark:text-zinc-500 rounded-b-md">
         {footer}
       </div>
     </div>
@@ -50,8 +53,8 @@ export default function Account({ user }: { user: User }) {
   const { isLoading, subscription, userDetails } = useUser();
   const [name, setName] = useState('');
   const router = useRouter();
-  const notify = () => toast.success('Account updated');
-  const notifyEmail = () => toast.success('Check your email for the password reset link.');
+  const notify = () => toast('Account updated');
+  const notifyEmail = () => toast('Check your email for the password reset link.');
 
   const handleUpdateName = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -59,9 +62,7 @@ export default function Account({ user }: { user: User }) {
     await updateFullName(user, name);
     setLoading(false);
     router.reload();
-    notify;
-    
-    
+    notify();
   };
 
   const handleResetRequest = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -69,7 +70,7 @@ export default function Account({ user }: { user: User }) {
     setLoading(true);
     await resetPasswordRequest(user, user ? user.email : undefined);
     setLoading(false);
-    notifyEmail;
+    notifyEmail();
   };
 
   
@@ -89,28 +90,22 @@ export default function Account({ user }: { user: User }) {
   };
 
   const subscriptionPrice =
-    subscription &&
-    new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: subscription?.prices?.currency,
-      minimumFractionDigits: 0
-    }).format((subscription?.prices?.unit_amount || 0) / 100);
-
- 
-    
-   
-
-
+  subscription &&
+  new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: subscription?.prices?.currency,
+    minimumFractionDigits: 0
+  }).format((subscription?.prices?.unit_amount || 0) / 100);
 
   return (
     <section className="bg-white dark:bg-dark mb-32"> 
-    
+      <ToastContainer />
       <div className="max-w-6xl mx-auto pt-8 sm:pt-24 pb-8 px-4 sm:px-6 lg:px-8">
         <div className="sm:flex sm:flex-col sm:align-center">
-          <h1 className="text-4xl font-extrabold text-black dark:text-white sm:text-center sm:text-6xl">
+          <h1 className="text-4xl font-extrabold text-gray-800 dark:text-white sm:text-center sm:text-6xl">
             Account
           </h1>
-          <p className="mt-5 text-xl text-zinc-200 sm:text-center sm:text-2xl max-w-2xl m-auto">
+          <p className="mt-5 text-xl dark:text-zinc-200 sm:text-center sm:text-2xl max-w-2xl m-auto">
             We partnered with Stripe for a simplified billing.
           </p>
         </div>
@@ -128,14 +123,7 @@ export default function Account({ user }: { user: User }) {
               <p className="pb-4 sm:pb-0">
                 Manage your subscription on Stripe.
               </p>
-              <Button
-                variant="slim"
-                loading={loading}
-                disabled={loading || !subscription}
-                onClick={redirectToCustomerPortal}
-              >
-                Open customer portal
-              </Button>
+              
             </div>
           }
         >
@@ -152,17 +140,24 @@ export default function Account({ user }: { user: User }) {
               </Link>
             )}
           </div>
+          <Button
+            variant="slim"
+            loading={loading}
+            disabled={loading || !subscription}
+            onClick={redirectToCustomerPortal}
+          >
+            Open customer portal
+          </Button>
         </Card>
         <Card
           title="Your Name"
           description="Please enter your full name."
-          footer={<p>Please use 32 characters at maximum.</p>}
+          footer={<p>Please use 32 characters at maximum. (refresh the page to see changes)</p>}
         >
          
           <div className="text-xl mt-4 mb-4 font-semibold">
             <form className='mb-4' onSubmit={handleUpdateName} >
-             
-            <Input placeholder="Name" value={name} onChange={setName} className='mb-4' />
+              <Input placeholder="Name" value={name} onChange={setName} className='mb-4' />
               <Button
                 variant="slim"
                 type="submit"
@@ -171,7 +166,6 @@ export default function Account({ user }: { user: User }) {
               >
                 change
               </Button>
-              
             </form>
             {userDetails ? (
               `${
@@ -192,7 +186,7 @@ export default function Account({ user }: { user: User }) {
         <Card
           title="Your Email"
           description="Please enter the email address you want to use to login."
-          footer={<p>We will email you to verify the change.</p>}
+          footer={<p>To change your email please contact admin@comp.co.uk or call us 01484 484 484</p>}
         >
           <p className="text-xl mt-8 mb-4 font-semibold">
             {user ? user.email : undefined}
@@ -203,18 +197,17 @@ export default function Account({ user }: { user: User }) {
           description="request a password change."
           footer={<p>We will email you to verify the change.</p>}
         >
-        <form className='mb-4' onSubmit={handleResetRequest} method='post'>
-          
-          <Button
-            variant="slim"
-            type="submit"
-            loading={loading}
-            disabled={loading || !user }
-            onClick={() => router.push('/signin')}
-          >
-            change
-          </Button>
-        </form>
+          <form className='mt-8 mb-4' onSubmit={handleResetRequest} method='post'>
+            
+            <Button
+              variant="slim"
+              type="submit"
+              loading={loading}
+              disabled={loading || !user }
+            >
+              change
+            </Button>
+          </form>
         </Card>
       </div>
     </section>

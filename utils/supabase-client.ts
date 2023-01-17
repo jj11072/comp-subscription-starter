@@ -54,14 +54,14 @@ export const updateFullName = async (user: User, name: string) => {
 
 export const resetPasswordRequest = async (user: User, email: any) => {
   const {data, error} = await supabase.auth.resetPasswordForEmail(email,  {
-          redirectTo: "http://localhost:3000/password-reset", // this will redirect to us at password-reset page,
-          // you can also set your own page for it.
-        })
-        if (error) {
-          console.log(error.message)
-          throw error
-        } else {
-          console.log(data)
-        };
+  redirectTo: "http://localhost:3000/password-reset", // this will redirect to us at password-reset page,
+    // you can also set your own page for it.
+  })
+  if (error) {
+    console.log(error.message)
+    throw error
+  } else {
+    console.log(data)
+  };
 }
 
