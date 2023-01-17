@@ -9,8 +9,6 @@ import Faq from '../components/Faq';
 import SectionTitle from '../components/SectionTitle';
 import VideoPlayer from '../components/Video';
 import React from 'react';
-import { Toaster } from 'react-hot-toast';
-import { useRouter } from 'next/router';
 
 export default function Home() {
   
