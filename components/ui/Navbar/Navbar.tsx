@@ -121,7 +121,7 @@ const Header = () => {
         <div className="hidden space-x-4 lg:flex ">     
             {user ? (
               <span
-              className={s.btn_primary}
+              className='btn bg-purple-500 text-white'
                 onClick={async () => {
                   await supabaseClient.auth.signOut();
                   router.push('/signin');
@@ -131,7 +131,7 @@ const Header = () => {
               </span>
             ) : (
               <Link href="/signin">
-                <a className={s.btn_primary}>Sign in</a>
+                <a className='btn bg-purple-500 text-white'>Sign in</a>
               </Link>
             )}
           
