@@ -1,7 +1,6 @@
 
 import Input from "@/components/ui/Input";
 import React, { useState, useEffect } from "react";
-//TODO import toast from "react-hot-toast";
 import { User } from '@supabase/supabase-js';
 import { supabase } from "@/utils/supabase-client";
 import Button from 'components/ui/Button';
@@ -59,6 +58,9 @@ function PasswordReset({ user }: { user: User }) {
 	}, [updatedUser, user]);
 	return (
 		<div>
+			<div className=" my-8 text-center text-4xl">
+			  <h1>Password reset</h1>
+			</div>
 			<form onSubmit={(e) => handlePasswordChange(e)}>
 				{message.content && (
 					<div
@@ -74,9 +76,10 @@ function PasswordReset({ user }: { user: User }) {
 				<Input
 					type="password"
 					required			
-					placeholder="Please enter your Password"
-					onChange={() => setPassword}
-          value='newPassword'
+					placeholder="Please enter your new Password"
+					onChange={(e) => setPassword(e)}
+					className="mb-2"
+                    
 				/>
 
 				<Button
@@ -88,6 +91,7 @@ function PasswordReset({ user }: { user: User }) {
 					change 
 				</Button>
 			</form>
+			<p></p>
 		</div>
 	);
 }

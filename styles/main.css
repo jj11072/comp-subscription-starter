@@ -3,12 +3,16 @@
 @tailwind utilities;
 
 @layer components{
-.btn {
- @apply w-full px-6 py-2 text-center text-black  outline  -outline-offset-2 outline-purple-500 rounded-md lg:ml-5 
- }
- .bg-dark{
+ .btn {
+   @apply w-full px-6 py-2 text-center text-black  outline  -outline-offset-2 outline-purple-500 rounded-md lg:ml-5 
+  }
+  .bg-dark{
    background-color: rgb( 18, 18, 18);
- }
+  }
+  .tech-img{
+   -webkit-filter: invert(1);
+   filter: invert(1)
+  }
 }
 
 *,
