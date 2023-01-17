@@ -1,31 +1,10 @@
 import Image from 'next/image';
-import React, { useRef } from 'react';
+import React from 'react';
 import Container from './Container';
 
 export default function Benefits(props) {
   const { data } = props;
-  const first = useRef();
-  // JSON.stringify(data);
-
-    // const styleSecondWord = (styleHook) => {
-    //   styleHook = styleHook || "second-word";
-    //   let words = [];
-    //   for (let i = 0, len = this.length; i < len; i++) {
-    //     words = (this[i].textContent || this[i].innerText).split(/\s+/);
-    //     if (words[1]) {
-    //      words[1] = '<span class="' + styleHook + '">' + words[1] + "</span>";
-    //       this[i].innerHTML = words.join(" ");
-    //     }
-    //   }
-    // }
-    // const handleChange = useCallback(() => {
-    //   document.getElementsByTagName('h3').styleSecondWord("word") ;
-    // }, [])
-
-    // window.addEventListener('load', handleChange);
-    
-  console.log(first.current);
-
+  
   return (
     <>
       <Container className="flex flex-wrap mb-20 lg:gap-10 lg:flex-nowrap ">
@@ -57,7 +36,6 @@ export default function Benefits(props) {
           <div>
             <div className="flex flex-col w-full mt-4">
               <h3
-                ref={first}
                 className="max-w-2xl mt-3 text-3xl font-bold leading-snug tracking-tight text-gray-800 lg:leading-tight lg:text-4xl dark:text-white word"
               >
                 {data && data.title ? data.title : 'Benefits'}
@@ -92,7 +70,7 @@ function Benefit(props) {
       <div className="flex items-start mt-8 space-x-3">
         <div className="flex items-center justify-center flex-shrink-0 mt-1 bg-purple-500 rounded-md w-11 h-11 ">
           {React.cloneElement(props.icon, {
-            className: 'text-indigo-50'
+            className: 'text-white'
           })}
         </div>
         <div>

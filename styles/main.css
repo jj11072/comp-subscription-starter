@@ -42,10 +42,11 @@ body {
 }
 
 body {
+  
   position: relative;
   min-height: 100%;
   margin: 0; 
-  @apply  ml-1 lg:ml-0 px-3 lg:px-0
+  @apply  ml-1 lg:ml-0 px-3 lg:px-0 
 }
 
 a {

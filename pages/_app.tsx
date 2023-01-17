@@ -10,9 +10,6 @@ import { MyUserContextProvider } from 'utils/useUser';
 import type { Database } from 'types_db';
 import { ThemeProvider } from "next-themes";
 
-import { Toaster } from 'react-hot-toast';
-
-
 
 
 
@@ -29,12 +26,8 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     <ThemeProvider attribute="class">
       <SessionContextProvider supabaseClient={supabaseClient}>
         <MyUserContextProvider>
-          
-          <Layout>
-            <>
-            
-            <Component {...pageProps} />
-            </>
+          <Layout>            
+            <Component {...pageProps} />            
           </Layout>
         </MyUserContextProvider>
       </SessionContextProvider>

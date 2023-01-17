@@ -7,6 +7,9 @@
 
 
  .a{
-  @apply w-full mb-4 rounded-md  hover:text-purple-500 dark:hover:text-purple-500 focus:text-purple-500 focus:bg-indigo-100 dark:focus:bg-black focus:outline-none
+  @apply w-full mb-4 rounded-md text-lg focus:text-purple-500 focus:bg-indigo-100 dark:focus:bg-black focus:outline-none flex items-center justify-center 
  }
  
+ .btn_primary{
+  @apply btn bg-purple-500 text-white
+ }

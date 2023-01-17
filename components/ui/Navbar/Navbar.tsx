@@ -19,13 +19,13 @@ const Header = () => {
   
 
   return (
-    <header className="container sticky -top-1 bg-white dark:bg-dark z-20 ">
+    <header className="container sticky top-0 bg-white dark:bg-dark z-20 mx-auto ">
       <nav className="container outline-bottom relative flex flex-wrap items-center justify-between p-6 w-full lg:justify-between xl:px-0">
         {/* Logo  */}
         <Disclosure >
           {({ open }) => (
             <>
-              <div className=" flex flex-wrap items-center justify-between w-full lg:w-auto">
+              <div className=" flex flex-wrap items-center justify-between w-full lg:w-auto ">
                 <Link href="/">
                   <a className="flex items-center space-x-2 text-2xl font-medium text-purple-500 dark:hover:text-purple-500 dark:text-gray-100">
                     <span>
@@ -65,7 +65,7 @@ const Header = () => {
                     {navigation.map((item, index ) => (
                       <Link href={`/${item}`} key={index} >
                           <a className={s.a}>
-                            <Disclosure.Button className='btn dark:text-white' >
+                            <Disclosure.Button>
                               {item}
                             </Disclosure.Button>
                           </a>
@@ -86,7 +86,7 @@ const Header = () => {
                     ) : (
                       <Link href="/signin">
                           <a className='absolute right-0 bottom-0 rounded-md lg:ml-5'>
-                            <Disclosure.Button className=' btn bg-purple-500 text-white'  >
+                            <Disclosure.Button className=' btn rounded-md bg-purple-500 text-white'  >
                               Sign in
                             </Disclosure.Button>
                           </a>
@@ -118,7 +118,7 @@ const Header = () => {
           </ul>
         </div>
 
-        <div className="hidden space-x-4 lg:flex nav__item">     
+        <div className="hidden space-x-4 lg:flex ">     
             {user ? (
               <span
               className={s.btn_primary}

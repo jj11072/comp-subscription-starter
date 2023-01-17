@@ -15,14 +15,14 @@ export default function Footer() {
   ];
   const legal = ["Terms", "Privacy", "Legal"];
   return (
-    <div className="relative  ">
-      <Container>
-        <div className="grid max-w-screen-xl grid-cols-1 gap-10 pt-10 mx-auto mt-5 border-t border-gray-100 dark:border-trueGray-700 lg:grid-cols-5">
+      <Container className=''>
+        <div className="grid max-w-screen-xl grid-cols-1 gap-6 pt-10 mx-auto mt-5 border-t border-gray-100 dark:border-trueGray-700 lg:grid-cols-6">
+          
           <div className="lg:col-span-2">
             <div>
               {" "}
               <Link href="/">
-                <a className="flex items-center justify-center space-x-2 text-2xl font-medium text-indigo-500 dark:text-gray-100">
+                <a className="flex items-center justify-center space-x-2 text-2xl font-medium tex-500 dark:text-gray-100">
                   <Logo />
                   <span>Comp</span>
                 </a>
@@ -30,32 +30,31 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 ">
-
-            <div className="flex flex-wrap w-full -mt-2  lg:ml-0">
+          <div className="flex items-center px-auto lg:col-span-2">
+            <div className="flex flex-wrap w-full text-center">
               {navigation.map((item, index) => (
                 <Link key={index} href="/">
-                  <a className="w-full px-4 py-2 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-trueGray-700">
+                  <a className="w-full px-4 py-2 text-gray-500 rounded-md dark:text-gray-300 hover:text-purple-500 focus:text-purple-500 focus:bg-purple-100 focus:outline-none dark:focus:bg-trueGray-700">
                     {item}
                   </a>
                 </Link>
               ))}
             </div>
 
-            <div className="flex flex-wrap w-full -mt-2 ml-12  lg:ml-0">
+            <div className="flex flex-wrap w-full text-center">
               {legal.map((item, index) => (
                 <Link key={index} href="/">
-                  <a className="w-full px-4 py-2 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-trueGray-700">
+                  <a className="w-full px-4 py-2 text-gray-500 rounded-md dark:text-gray-300 hover:text-purple-500 focus:text-purple-500 focus:bg-purple-100 focus:outline-none dark:focus:bg-trueGray-700">
                     {item}
                   </a>
                 </Link>
               ))}
             </div>
-
           </div>
-          <div className="mx-auto">
+
+          <div className="mx-auto lg:col-span-2">
             <div className="text-center">Follow us</div>
-            <div className="flex mt-5 space-x-5 text-gray-400 dark:text-gray-500">
+            <div className="flex mt-5 space-x-5 text-gray-500 dark:text-gray-500">
               <a
                 href="https://twitter.com/web3templates"
                 target="_blank"
@@ -86,8 +85,8 @@ export default function Footer() {
               </a>
             </div>
           </div>
-        </div>
 
+        </div>
         <div className="my-10 text-sm text-center text-gray-600 dark:text-gray-400">
           Made with ♥ by{" "}
           <a
@@ -99,8 +98,6 @@ export default function Footer() {
           Copyright © {new Date().getFullYear()}. All rights reserved.
         </div>
       </Container>
-
-    </div>
   );
 }
 
