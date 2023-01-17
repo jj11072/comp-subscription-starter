@@ -56,7 +56,7 @@ const Form = () => {
           We usually respond in a few hours
         </p>
       </div>
-      <div className="flex-grow h-full p-6 overflow-auto bg-gray-50 dark:bg-dark text-black">
+      <div className="flex-grow h-full p-6 overflow-auto bg-gray-50 dark:bg-[rgb(18,18,18)] text-black">
         {!isSubmitSuccessful && (
           <form onSubmit={handleSubmit(onSubmit)} noValidate>
             <div className="mb-4">

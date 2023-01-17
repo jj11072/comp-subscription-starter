@@ -19,7 +19,7 @@ const Header = () => {
   
 
   return (
-    <header className="container sticky top-0 bg-white dark:bg-dark z-20 mx-auto ">
+    <header className="container sticky top-0 bg-white dark:bg-[rgb(18,18,18)] z-20 mx-auto ">
       <nav className="container outline-bottom relative flex flex-wrap items-center justify-between p-6 w-full lg:justify-between xl:px-0">
         {/* Logo  */}
         <Disclosure >
